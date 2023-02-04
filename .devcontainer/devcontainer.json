@@ -1,0 +1,10 @@
+{
+  "name": "Bazel",
+  "image": "ghcr.io/noldor-solutions/alpine-bazel:latest",
+  "hostRequirements": {
+    "cpus": 4,
+    "memory": "8gb",
+    "storage": "16gb"
+  },
+  "features": {}
+}
