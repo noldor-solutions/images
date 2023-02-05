@@ -1,4 +1,4 @@
-bazel-bin/
-bazel-images/
-bazel-out/
-bazel-testlogs/
+bazel-bin
+bazel-images
+bazel-out
+bazel-testlogs
