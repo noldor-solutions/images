@@ -53,13 +53,15 @@ container_run_and_commit(
     "apk add --no-cache xz",
     "apk add --no-cache zip",
 
+    "export GOROOT=/usr/lib/go",
+
     "mkdir -p /tmp/bazel-release",
     "chmod a+rwx /tmp/bazel-release",
     "cd /tmp/bazel-release",
     "wget -O bazel-release-dist.zip https://github.com/bazelbuild/bazel/releases/download/6.0.0/bazel-6.0.0-dist.zip",
     "unzip bazel-release-dist.zip",
-    "env JAVA_HOME=/usr/lib/jvm/java-11-openjdk",
-    "EXTRA_BAZEL_ARGS='--tool_java_runtime_version=local_jdk'",
+    "export JAVA_HOME=/usr/lib/jvm/java-11-openjdk",
+    "export EXTRA_BAZEL_ARGS='--tool_java_runtime_version=local_jdk'",
     "bash ./compile.sh",
     "cp output/bazel /usr/local/bin/",
     "cd",
@@ -76,6 +78,6 @@ container_run_and_commit(
     "echo 'test --test_verbose_timeout_warnings' >> /etc/bazel.bazelrc",
     "echo 'test --test_summary=terse' >> /etc/bazel.bazelrc",
 
-    "export PATH=/usr/local/bin:$PATH"
+    "export PATH=/usr/local/bin:$PATH",
   ],
 )
