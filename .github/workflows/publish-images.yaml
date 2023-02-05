@@ -1,9 +1,6 @@
-name: Build Images
+name: Publish Images
 
 on:
-  pull_request:
-    branches:
-      - main
   push:
     branches:
       - main
@@ -13,12 +10,19 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
-    name: "Build all Docker Images"
+  publish:
+    name: "Publish all Docker Images"
     runs-on: ubuntu-latest
     steps:
       - name: Git checkout
         uses: actions/checkout@v3
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Setup Bazel
         uses: bazelbuild/setup-bazelisk@v2
@@ -29,5 +33,5 @@ jobs:
           path: "~/.cache/bazel"
           key: bazel
 
-      - name: Build all Docker Images
-        run: bazel build ...
+      - name: Publish all Docker Images
+        run: bazel run //alpine-bazel:push
