@@ -1,0 +1,8 @@
+run --color=yes
+build --color=yes
+build --verbose_failures
+build --verbose_failures
+build --enable_runfiles
+test --test_output=errors
+test --test_verbose_timeout_warnings
+test --test_summary=terse
